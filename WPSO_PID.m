@@ -1,47 +1,47 @@
-%´ø¹ßĞÔÈ¨ÖØµÄPSO-PID£¬±¾ÎÄËùÓÃ´úÂëÔ´ÓÚ½ÌÑ§´úÂëĞŞ¸Ä¶øÀ´
+%å¸¦æƒ¯æ€§æƒé‡çš„PSO-PIDï¼Œæœ¬æ–‡æ‰€ç”¨ä»£ç æºäºæ•™å­¦ä»£ç ä¿®æ”¹è€Œæ¥
 clc;
 clear;
 close all;
-m=60;%Á£×ÓÊı
-%dim=3;%Á£×ÓÎ¬Êı
-dim=3;%Á£×ÓÎ¬Êı
-vmax=[2,1,1];%ËÙ¶È×î´óÖµ kp,ki,kd
-vmin=[-2,-1,-1];%ËÙ¶È×îĞ¡Öµkp,ki,kd
-xmax=[10,5,5];%Î»ÖÃ×î´óÖµkp,ki,kd
-xmin=[0,0,0];%Î»ÖÃ×îĞ¡Öµ
-tmax=100;%×î´óµü´ú´ÎÊı
+m=60;%ç²’å­æ•°
+%dim=3;%ç²’å­ç»´æ•°
+dim=3;%ç²’å­ç»´æ•°
+vmax=[2,1,1];%é€Ÿåº¦æœ€å¤§å€¼ kp,ki,kd
+vmin=[-2,-1,-1];%é€Ÿåº¦æœ€å°å€¼kp,ki,kd
+xmax=[10,5,5];%ä½ç½®æœ€å¤§å€¼kp,ki,kd
+xmin=[0,0,0];%ä½ç½®æœ€å°å€¼
+tmax=100;%æœ€å¤§è¿­ä»£æ¬¡æ•°
 c1=2; 
-c2=2; %Ñ§Ï°Òò×Ó
+c2=2; %å­¦ä¹ å› å­
 c3=2;
 x=rand(m,dim);
 v=rand(m,dim);
 pfit=rand(1,m);
-wmax=0.9; %¹ßĞÔÈ¨ÖØ×î´óÖµ wpso
-wmin=0.4; %¹ßĞÔÈ¨ÖØ×îĞ¡Öµ wpso
+wmax=0.9; %æƒ¯æ€§æƒé‡æœ€å¤§å€¼ wpso
+wmin=0.4; %æƒ¯æ€§æƒé‡æœ€å°å€¼ wpso
 countermax=1;
 gbest2=zeros(1,tmax);
 pgt2=zeros(3,tmax);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%¹ßĞÔÈ¨ÖØÏßĞÔµİ¼õµ÷Õû
+%%%%%%%%%%%%%%%%%%%%%%%%%%æƒ¯æ€§æƒé‡çº¿æ€§é€’å‡è°ƒæ•´
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%Á£×ÓÈº³õÊ¼»¯
+%%%%%%%%%ç²’å­ç¾¤åˆå§‹åŒ–
 for counter=1:countermax
-    for i=1:m    %Î»ÖÃ³õÊ¼»¯
+    for i=1:m    %ä½ç½®åˆå§‹åŒ–
         for j=1:dim
             x(i,j)=rand()*(xmax(j)-xmin(j))+xmin(j);       
         end
     end
-    pb=x;%Á£×Ó×î¼ÑÎ»ÖÃ
-    for i=1:m   %ËÙ¶È³õÊ¼»¯
+    pb=x;%ç²’å­æœ€ä½³ä½ç½®
+    for i=1:m   %é€Ÿåº¦åˆå§‹åŒ–
         for j=1:dim
              v(i,j)=rand()*(vmax(j)-vmin(j))+vmin(j);
         end
     end
 
-    for i=1:m    %¼ÆËãÁ£×Ó³õÊ¼Î»ÖÃÊÊÓ¦¶È
-        kp=x(i,1); %±ÈÀıÏµÊı¸³Öµ
-        ki=x(i,2); %»ı·ÖÏµÊı¸³Öµ
-        kd=x(i,3); %Î¢·ÖÏµÊı¸³Öµ
+    for i=1:m    %è®¡ç®—ç²’å­åˆå§‹ä½ç½®é€‚åº”åº¦
+        kp=x(i,1); %æ¯”ä¾‹ç³»æ•°èµ‹å€¼
+        ki=x(i,2); %ç§¯åˆ†ç³»æ•°èµ‹å€¼
+        kd=x(i,3); %å¾®åˆ†ç³»æ•°èµ‹å€¼
         [t,w1,u]=sim('shuixiang_pid',[0,10]);
        if min(u(:,2))<0
           pfit(i)=max(u(:,1))+c3*abs(min(u(:,2)));
@@ -49,8 +49,8 @@ for counter=1:countermax
           pfit(i) =max(u(:,1));
        end
     end
-    [gbest,index]=min(pfit);%gbestÈ«¾Ö×îĞ¡ÊÊÓ¦¶È
-    pg=x(index,:);%È«¾Ö×î¼ÑÎ»ÖÃ
+    [gbest,index]=min(pfit);%gbestå…¨å±€æœ€å°é€‚åº”åº¦
+    pg=x(index,:);%å…¨å±€æœ€ä½³ä½ç½®
 
     
     
@@ -88,16 +88,16 @@ for counter=1:countermax
               pfitness=max(u(:,1));
            end
            if pfitness<pfit(i)
-               pfit(i)=pfitness; %¸üĞÂÁ£×Ó×î¼ÑÊÊÓ¦¶È
-               pb(i,:)=x(i,:);%¸üĞÂÁ£×Ó×î¼ÑÎ»ÖÃ
+               pfit(i)=pfitness; %æ›´æ–°ç²’å­æœ€ä½³é€‚åº”åº¦
+               pb(i,:)=x(i,:);%æ›´æ–°ç²’å­æœ€ä½³ä½ç½®
            end
           if pfitness<gbest
-               gbest=pfitness; %¸üÈ«¾Ö×î¼ÑÊÊÓ¦¶È
-               pg=x(i,:);      %¸üĞÂÈ«¾Ö×î¼ÑÎ»ÖÃ
+               gbest=pfitness; %æ›´å…¨å±€æœ€ä½³é€‚åº”åº¦
+               pg=x(i,:);      %æ›´æ–°å…¨å±€æœ€ä½³ä½ç½®
           end      
         end 
-        gbest2(t)=gbest2(t)+gbest;    %È«¾Ö×îÓÅÎ»ÖÃÊÊÓ¦¶È¸ú×Ù¼ÇÂ¼
-        pgt2(1,t)=pgt2(1,t)+pg(1);      %²ÎÊı¸ú×Ù¼ÇÂ¼
+        gbest2(t)=gbest2(t)+gbest;    %å…¨å±€æœ€ä¼˜ä½ç½®é€‚åº”åº¦è·Ÿè¸ªè®°å½•
+        pgt2(1,t)=pgt2(1,t)+pg(1);      %å‚æ•°è·Ÿè¸ªè®°å½•
         pgt2(2,t)=pgt2(2,t)+pg(2);
         pgt2(3,t)=pgt2(3,t)+pg(3);
      
@@ -107,8 +107,8 @@ end
  pgt2=pgt2/countermax;
  kp2=pgt2(1,tmax);
  ki2=pgt2(2,tmax);
-  kd2=pgt2(3,tmax);%×îÓÅ²ÎÊıÊä³ö
- %%%%%%%%%%%%%%%%%%%%%%%×îÖÕÓÅ»¯²ÎÊıÍ³Ò»·ÂÕæ
+  kd2=pgt2(3,tmax);%æœ€ä¼˜å‚æ•°è¾“å‡º
+ %%%%%%%%%%%%%%%%%%%%%%%æœ€ç»ˆä¼˜åŒ–å‚æ•°ç»Ÿä¸€ä»¿çœŸ
 % sim('PSO_PID',[0,10]);  
 % chaotiao1=max(PID_out.signals.values(:,1));
 % chaotiao1=100*(chaotiao1-1)/1;
@@ -119,6 +119,6 @@ end
 % figure(1);
 t=1:tmax;
 plot(t,gbest2(t),'-x');
-legend('±ê×¼PSO');
-xlabel('µü´ú´ÎÊıt');
-ylabel('outputÄ¿±êº¯ÊıÖµ');
+legend('æ ‡å‡†PSO');
+xlabel('è¿­ä»£æ¬¡æ•°t');
+ylabel('outputç›®æ ‡å‡½æ•°å€¼');ã€
