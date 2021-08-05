@@ -1,35 +1,35 @@
-% ÈË¹¤·äÈºËã·¨
-% ²ÎÊıËµÃ÷£º
-% Foods [FoodNumber][D]; % ³õÊ¼»¯µÄÊ³ÎïÔ´
-% ObjVal[FoodNumber];    % Ä¿±êº¯Êı
-% Fitness[FoodNumber];   % ÊÊÓ¦¶ÈÖµ£¬Ä¿±êº¯ÊıÖµµÄµ¹Êı
-% trial[FoodNumber];     % ÍÏÎ²²ÎÊı
-% prob[FoodNumber];      % ¼ÆËãµÄ¸ÅÂÊÖµ
-% solution [D];          % ²úÉúµÄĞÂ½â£¬ºòÑ¡Î»ÖÃ produced by v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij}) j is a randomly chosen parameter and k is a randomlu chosen solution different from i*/
-% ObjValSol;             % ĞÂ½âÏÂµÄÄ¿±êº¯ÊıÖµ
-% FitnessSol;            % ĞÂ½âµÄÊÊÓ¦¶ÈÖµ
-% neighbour, param2change; ¶ÔÓ¦ÓÚ·½³Ì v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij})*/
-% GlobalMin;             % Ä¿±êº¯ÊıÖµ×îĞ¡Öµ
-% GlobalParams[D];       % Ã¿Ò»´ÎÔËĞĞ¸ÃËã·¨µÃµ½µÄ×îÓÅ¸öÌåÖµ£¬Î´ÖªÊıµÄ½â
-% GlobalMins[runtime];   % Ñ­»·¼ÆËã¸ÃËã·¨µÄ´ÎÊı£¬¼ÇÂ¼ÏÂµÄ×îĞ¡½â£¬ÑéÖ¤Ëã·¨µÄÂ³°ôĞÔºÍÎÈ¶¨ĞÔ
+% äººå·¥èœ‚ç¾¤ç®—æ³•
+% å‚æ•°è¯´æ˜ï¼š
+% Foods [FoodNumber][D]; % åˆå§‹åŒ–çš„é£Ÿç‰©æº
+% ObjVal[FoodNumber];    % ç›®æ ‡å‡½æ•°
+% Fitness[FoodNumber];   % é€‚åº”åº¦å€¼ï¼Œç›®æ ‡å‡½æ•°å€¼çš„å€’æ•°
+% trial[FoodNumber];     % æ‹–å°¾å‚æ•°
+% prob[FoodNumber];      % è®¡ç®—çš„æ¦‚ç‡å€¼
+% solution [D];          % äº§ç”Ÿçš„æ–°è§£ï¼Œå€™é€‰ä½ç½® produced by v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij}) j is a randomly chosen parameter and k is a randomlu chosen solution different from i*/
+% ObjValSol;             % æ–°è§£ä¸‹çš„ç›®æ ‡å‡½æ•°å€¼
+% FitnessSol;            % æ–°è§£çš„é€‚åº”åº¦å€¼
+% neighbour, param2change; å¯¹åº”äºæ–¹ç¨‹ v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij})*/
+% GlobalMin;             % ç›®æ ‡å‡½æ•°å€¼æœ€å°å€¼
+% GlobalParams[D];       % æ¯ä¸€æ¬¡è¿è¡Œè¯¥ç®—æ³•å¾—åˆ°çš„æœ€ä¼˜ä¸ªä½“å€¼ï¼ŒæœªçŸ¥æ•°çš„è§£
+% GlobalMins[runtime];   % å¾ªç¯è®¡ç®—è¯¥ç®—æ³•çš„æ¬¡æ•°ï¼Œè®°å½•ä¸‹çš„æœ€å°è§£ï¼ŒéªŒè¯ç®—æ³•çš„é²æ£’æ€§å’Œç¨³å®šæ€§
 clc,clear,close all
 warning off
 feature jit off
 tic
-% Ëã·¨²ÎÊı
-NP=20;           % ·äÈº´óĞ¡
-dim=3;%ÃÛ·äÎ¬Êı
+% ç®—æ³•å‚æ•°
+NP=20;           % èœ‚ç¾¤å¤§å°
+dim=3;%èœœèœ‚ç»´æ•°
 c3=2;
-FoodNumber=NP/2; % ·äÈºÊ³ÎïÔ´ÊıÁ¿£¬Ò²¾ÍÊÇ²úÉú ½â µÄ¸öÊı
-limit=10;       % ¾­¹ı¡°limit¡±´Î²ÉÃÛ·äºÍ¹Û²ì·äµÄÑ­»·ËÑË÷Ö®ºó£¬²»ÄÜ¹»±»¸Ä½ø£¬ÄÇÃ´¸ÃÎ»ÖÃ½«±»·ÅÆú
-maxCycle=500;    % ×î´óµü´úÑ­»·
+FoodNumber=NP/2; % èœ‚ç¾¤é£Ÿç‰©æºæ•°é‡ï¼Œä¹Ÿå°±æ˜¯äº§ç”Ÿ è§£ çš„ä¸ªæ•°
+limit=10;       % ç»è¿‡â€œlimitâ€æ¬¡é‡‡èœœèœ‚å’Œè§‚å¯Ÿèœ‚çš„å¾ªç¯æœç´¢ä¹‹åï¼Œä¸èƒ½å¤Ÿè¢«æ”¹è¿›ï¼Œé‚£ä¹ˆè¯¥ä½ç½®å°†è¢«æ”¾å¼ƒ
+maxCycle=500;    % æœ€å¤§è¿­ä»£å¾ªç¯
 x=rand(NP,dim);
 
 %/* Problem specific variables*/
-for i=1:NP    %¼ÆËãÁ£×Ó³õÊ¼Î»ÖÃÊÊÓ¦¶È
-        kp=x(i,1); %±ÈÀıÏµÊı¸³Öµ
-        ki=x(i,2); %»ı·ÖÏµÊı¸³Öµ
-        kd=x(i,3); %Î¢·ÖÏµÊı¸³Öµ
+for i=1:NP    %è®¡ç®—ç²’å­åˆå§‹ä½ç½®é€‚åº”åº¦
+        kp=x(i,1); %æ¯”ä¾‹ç³»æ•°èµ‹å€¼
+        ki=x(i,2); %ç§¯åˆ†ç³»æ•°èµ‹å€¼
+        kd=x(i,3); %å¾®åˆ†ç³»æ•°èµ‹å€¼
         [t,w1,u]=sim('shuixiang_pid',[0,10]);
        if min(u(:,2))<0
           pfit(i)=max(u(:,1))+c3*abs(min(u(:,2)));
@@ -37,73 +37,73 @@ for i=1:NP    %¼ÆËãÁ£×Ó³õÊ¼Î»ÖÃÊÊÓ¦¶È
           pfit(i) =max(u(:,1));
        end
     end
-%objfun='Sphere';     % ´ıÓÅ»¯º¯Êı
+%objfun='Sphere';     % å¾…ä¼˜åŒ–å‡½æ•°
 %objfun='pfit';
-%D=10;               % Î´ÖªÊıÎª100¸ö
-Xmax=[2,1,1];%ËÙ¶È×î´óÖµ kp,ki,kd
-Xmin=[-2,-1,-1];%ËÙ¶È×îĞ¡Öµkp,ki,kd
+%D=10;               % æœªçŸ¥æ•°ä¸º100ä¸ª
+Xmax=[2,1,1];%é€Ÿåº¦æœ€å¤§å€¼ kp,ki,kd
+Xmin=[-2,-1,-1];%é€Ÿåº¦æœ€å°å€¼kp,ki,kd
 D=Xmax-Xmin;
-%ub=ones(1,D)*10;    % Î´ÖªÁ¿È¡ÖµÏÂ±ß½ç
-%lb=ones(1,D)*(-10); % Î´ÖªÁ¿È¡ÖµÉÏ±ß½ç
-runtime=1;           % Ëã·¨ÔËĞĞ´ÎÊı£¬Ò»°ãÉèÖÃ1¼´¿É
+%ub=ones(1,D)*10;    % æœªçŸ¥é‡å–å€¼ä¸‹è¾¹ç•Œ
+%lb=ones(1,D)*(-10); % æœªçŸ¥é‡å–å€¼ä¸Šè¾¹ç•Œ
+runtime=1;           % ç®—æ³•è¿è¡Œæ¬¡æ•°ï¼Œä¸€èˆ¬è®¾ç½®1å³å¯
 
-GlobalMins=zeros(1,runtime);   % ÊÊÓ¦¶È×îĞ¡Öµ³õÊ¼»¯
+GlobalMins=zeros(1,runtime);   % é€‚åº”åº¦æœ€å°å€¼åˆå§‹åŒ–
 
 for r=1:runtime
   
-%³õÊ¼»¯±äÁ¿Öµ
-% Range = repmat((ub-lb),[FoodNumber 1]);       % ×î´óÖµ
-% Lower = repmat(lb, [FoodNumber 1]);           % ×îĞ¡Öµ
-% Foods = rand(FoodNumber,D) .* Range + Lower;  % ³õÊ¼»¯¸öÌå
- for i=1:NP    %Î»ÖÃ³õÊ¼»¯
+%åˆå§‹åŒ–å˜é‡å€¼
+% Range = repmat((ub-lb),[FoodNumber 1]);       % æœ€å¤§å€¼
+% Lower = repmat(lb, [FoodNumber 1]);           % æœ€å°å€¼
+% Foods = rand(FoodNumber,D) .* Range + Lower;  % åˆå§‹åŒ–ä¸ªä½“
+ for i=1:NP    %ä½ç½®åˆå§‹åŒ–
         for j=1:dim
             Foods(i,j)=rand()*(Xmax(j)-Xmin(j))+Xmin(j);
            %x(i,j)=rand()*(xmax(j)-xmin(j))+xmin(j);       
         end
     end
-%ObjVal=feval(objfun,Foods);       % Ä¿±êº¯ÊıÖµ
-ObjVal=feval(pfit,Foods);       % Ä¿±êº¯ÊıÖµ
-Fitness=calculateFitness(ObjVal); % ÊÊÓ¦¶ÈÖµ£¬È¡Æäµ¼Êı£¬Îª×îĞ¡Öµ
+%ObjVal=feval(objfun,Foods);       % ç›®æ ‡å‡½æ•°å€¼
+ObjVal=feval(pfit,Foods);       % ç›®æ ‡å‡½æ•°å€¼
+Fitness=calculateFitness(ObjVal); % é€‚åº”åº¦å€¼ï¼Œå–å…¶å¯¼æ•°ï¼Œä¸ºæœ€å°å€¼
 
-% Éè¶¨ÍÏÎ²¾ØÕó£¬³õÊ¼»¯
+% è®¾å®šæ‹–å°¾çŸ©é˜µï¼Œåˆå§‹åŒ–
 trial=zeros(1,FoodNumber);
 
-% ÕÒµ½×îºÃµÄÊ³ÎïÔ´
+% æ‰¾åˆ°æœ€å¥½çš„é£Ÿç‰©æº
 BestInd=find(ObjVal==min(ObjVal));
 BestInd=BestInd(end);
-GlobalMin=ObjVal(BestInd);     % º¯ÊıÖµ×îĞ¡
-GlobalParams=Foods(BestInd,:); % ÏàÓ¦µÄÊ³ÎïÔ´¸öÌå
+GlobalMin=ObjVal(BestInd);     % å‡½æ•°å€¼æœ€å°
+GlobalParams=Foods(BestInd,:); % ç›¸åº”çš„é£Ÿç‰©æºä¸ªä½“
 
 iter=1;
-while ((iter <= maxCycle)) % µü´ú¿ªÊ¼
+while ((iter <= maxCycle)) % è¿­ä»£å¼€å§‹
 
-% ²ÉÃÛ·ä
+% é‡‡èœœèœ‚
     for i=1:(FoodNumber)
-        % ²ÎÊıËæ»ú¿É±ä
+        % å‚æ•°éšæœºå¯å˜
         Param2Change=fix(rand*D)+1;
-        % Ëæ»úÑ¡ÔñÏàÁ¬¸öÌå
+        % éšæœºé€‰æ‹©ç›¸è¿ä¸ªä½“
         neighbour=fix(rand*(FoodNumber))+1;
-        % Ëæ»úÑ¡ÔñµÄ¸öÌå²»µÈÓÚi
+        % éšæœºé€‰æ‹©çš„ä¸ªä½“ä¸ç­‰äºi
         while(neighbour==i)
             neighbour=fix(rand*(FoodNumber))+1;
         end
         
-       sol=Foods(i,:);  % ¸öÌåÑ¡Ôñ
+       sol=Foods(i,:);  % ä¸ªä½“é€‰æ‹©
        %  /*v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij}) */
        sol(Param2Change)=Foods(i,Param2Change)+(Foods(i,Param2Change)-Foods(neighbour,Param2Change))*(rand-0.5)*2;
         
-       % ¸öÌåÈ¡Öµ·¶Î§Ô¼Êø
-        ind=find(sol<Xmax); % ×îĞ¡ÖµÔ¼Êø
+       % ä¸ªä½“å–å€¼èŒƒå›´çº¦æŸ
+        ind=find(sol<Xmax); % æœ€å°å€¼çº¦æŸ
         sol(ind)=Xmax(ind);
-        ind=find(sol>Xmin); % ×î´óÖµÔ¼Êø
+        ind=find(sol>Xmin); % æœ€å¤§å€¼çº¦æŸ
         sol(ind)=Xmin(ind);
         
-        % ¹À¼ÆĞÂµÄÄ¿±êº¯ÊıÖµºÍÊÊÓ¦¶ÈÖµ
+        % ä¼°è®¡æ–°çš„ç›®æ ‡å‡½æ•°å€¼å’Œé€‚åº”åº¦å€¼
         ObjValSol=feval(pfit,sol);
         FitnessSol=calculateFitness(ObjValSol);
         
-       % ¸üĞÂ×îÓÅ¸öÌåÖµ
-       if (FitnessSol>Fitness(i)) % Èç¹ûĞÂ²úÉúµÄ¸öÌåÖµÊÊÓ¦¶ÈÖµÔ½´ó£¬Ôò±íÃ÷º¯ÊıÖµÔ½Ğ¡£¬Ôò¸öÌå×îÓÅ
+       % æ›´æ–°æœ€ä¼˜ä¸ªä½“å€¼
+       if (FitnessSol>Fitness(i)) % å¦‚æœæ–°äº§ç”Ÿçš„ä¸ªä½“å€¼é€‚åº”åº¦å€¼è¶Šå¤§ï¼Œåˆ™è¡¨æ˜å‡½æ•°å€¼è¶Šå°ï¼Œåˆ™ä¸ªä½“æœ€ä¼˜
             Foods(i,:)=sol;
             Fitness(i)=FitnessSol;
             ObjVal(i)=ObjValSol;
@@ -113,9 +113,9 @@ while ((iter <= maxCycle)) % µü´ú¿ªÊ¼
        end
     end
     
-% ¹Û²ì·ä
-% ¼ÆËã¸ÅÂÊ
-% ¹Û²ì·ä¸ù¾İÓëÃÛÔ´Ïà¹ØµÄ¸ÅÂÊÖµÑ¡ÔñÃÛÔ´£¬¸ÅÂÊÖµ¼ÆËã¹«Ê½
+% è§‚å¯Ÿèœ‚
+% è®¡ç®—æ¦‚ç‡
+% è§‚å¯Ÿèœ‚æ ¹æ®ä¸èœœæºç›¸å…³çš„æ¦‚ç‡å€¼é€‰æ‹©èœœæºï¼Œæ¦‚ç‡å€¼è®¡ç®—å…¬å¼
 % prob(i)=a*fitness(i)/max(fitness)+b*/
 prob=(0.9.*Fitness./max(Fitness))+0.1;  
 i=1;
@@ -123,30 +123,30 @@ t=0;
 while(t<FoodNumber)
     if(rand<prob(i))
         t=t+1;
-        % ¼ÌĞøËæ»úÑ¡Ôñ¸öÌå
+        % ç»§ç»­éšæœºé€‰æ‹©ä¸ªä½“
         Param2Change=fix(rand*D)+1;
-        % Ëæ»úÑ¡ÔñÏàÁ¬¸öÌå
+        % éšæœºé€‰æ‹©ç›¸è¿ä¸ªä½“
         neighbour=fix(rand*(FoodNumber))+1;
-        % Ëæ»úÑ¡ÔñµÄ¸öÌå²»µÈÓÚi      
+        % éšæœºé€‰æ‹©çš„ä¸ªä½“ä¸ç­‰äºi      
         while(neighbour==i)
             neighbour=fix(rand*(FoodNumber))+1;
         end
-       sol=Foods(i,:);  % ¸öÌåÑ¡Ôñ
+       sol=Foods(i,:);  % ä¸ªä½“é€‰æ‹©
        %  /*v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij}) */
        sol(Param2Change)=Foods(i,Param2Change)+(Foods(i,Param2Change)-Foods(neighbour,Param2Change))*(rand-0.5)*2;
         
-       % ¸öÌåÈ¡Öµ·¶Î§Ô¼Êø
-       ind=find(sol<Xmax); % ×îĞ¡ÖµÔ¼Êø
+       % ä¸ªä½“å–å€¼èŒƒå›´çº¦æŸ
+       ind=find(sol<Xmax); % æœ€å°å€¼çº¦æŸ
        sol(ind)=Xmax(ind);
-       ind=find(sol>Xmin); % ×î´óÖµÔ¼Êø
+       ind=find(sol>Xmin); % æœ€å¤§å€¼çº¦æŸ
        sol(ind)=Xmin(ind);
         
-       % ¹À¼ÆĞÂµÄÄ¿±êº¯ÊıÖµºÍÊÊÓ¦¶ÈÖµ
+       % ä¼°è®¡æ–°çš„ç›®æ ‡å‡½æ•°å€¼å’Œé€‚åº”åº¦å€¼
        ObjValSol=feval(pfit,sol);
        FitnessSol=calculateFitness(ObjValSol);
         
-       % ¸üĞÂ×îÓÅ¸öÌåÖµ
-       if (FitnessSol>Fitness(i)) % Èç¹ûĞÂ²úÉúµÄ¸öÌåÖµÊÊÓ¦¶ÈÖµÔ½´ó£¬Ôò±íÃ÷º¯ÊıÖµÔ½Ğ¡£¬Ôò¸öÌå×îÓÅ
+       % æ›´æ–°æœ€ä¼˜ä¸ªä½“å€¼
+       if (FitnessSol>Fitness(i)) % å¦‚æœæ–°äº§ç”Ÿçš„ä¸ªä½“å€¼é€‚åº”åº¦å€¼è¶Šå¤§ï¼Œåˆ™è¡¨æ˜å‡½æ•°å€¼è¶Šå°ï¼Œåˆ™ä¸ªä½“æœ€ä¼˜
             Foods(i,:)=sol;
             Fitness(i)=FitnessSol;
             ObjVal(i)=ObjValSol;
@@ -162,17 +162,17 @@ while(t<FoodNumber)
     end   
 end 
 
-    % ¼ÇÂ¼×îºÃµÄÄ¿±êº¯ÊıÖµ
+    % è®°å½•æœ€å¥½çš„ç›®æ ‡å‡½æ•°å€¼
     ind=find(ObjVal==min(ObjVal));
     ind=ind(end);
     if (ObjVal(ind)<GlobalMin)
-        GlobalMin=ObjVal(ind);      % ×îÓÅÄ¿±êº¯ÊıÖµ
-        GlobalParams=Foods(ind,:);  % ×îÓÅ¸öÌå
+        GlobalMin=ObjVal(ind);      % æœ€ä¼˜ç›®æ ‡å‡½æ•°å€¼
+        GlobalParams=Foods(ind,:);  % æœ€ä¼˜ä¸ªä½“
     end
          
          
-% Õì²ì·ä
-% Èç¹ûÄ³Ò»´ÎÑ­»·ÍÏÎ²´ÎÊı´óÓÚÉè¶¨limit£¬ÔòÖØĞÂ¸üĞÂ¸öÌå£¬ÖØĞÂ¼ÆËã
+% ä¾¦å¯Ÿèœ‚
+% å¦‚æœæŸä¸€æ¬¡å¾ªç¯æ‹–å°¾æ¬¡æ•°å¤§äºè®¾å®šlimitï¼Œåˆ™é‡æ–°æ›´æ–°ä¸ªä½“ï¼Œé‡æ–°è®¡ç®—
 ind=find(trial==max(trial));
 ind=ind(end);
 if (trial(ind)>limit)
@@ -192,10 +192,9 @@ end % End of ABC
 
 GlobalMins(r)=GlobalMin;
 end % end of runs
-disp('×îÓÅ½âÎª£º')
+disp('æœ€ä¼˜è§£ä¸ºï¼š')
 GlobalParams;
-disp('×îÓÅÄ¿±êº¯ÊıÖµÎª£º')
+disp('æœ€ä¼˜ç›®æ ‡å‡½æ•°å€¼ä¸ºï¼š')
 GlobalMin;
-
 toc
 % save all
