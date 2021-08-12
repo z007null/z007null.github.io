@@ -49,7 +49,7 @@ runtime=1;           % 算法运行次数，一般设置1即可
 GlobalMins=zeros(1,runtime);   % 适应度最小值初始化
 
 for r=1:runtime
-  
+ 
 %初始化变量值
 % Range = repmat((ub-lb),[FoodNumber 1]);       % 最大值
 % Lower = repmat(lb, [FoodNumber 1]);           % 最小值
