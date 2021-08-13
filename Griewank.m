@@ -1,36 +1,36 @@
-%ÀûÓÃ¸Ä½øµÄÁ£×ÓÈºÓë¹ßĞÔÈ¨ÖØÏßĞÔµİ¼õµÄÁ£×ÓÈº·Ö±ğ¶ÔGriewankº¯Êı
-%½øĞĞÓÅ»¯¡£Á£×ÓÊı£º60£»Î¬Êı£º10£»×î´óµü´ú´ÎÊı£º500£»·Ö±ğ²âÊÔ50´ÎÈ¡Æ½¾ùÖµ¡£
-%Ê±¼ä£º2017.6.17
-
+%åˆ©ç”¨æ”¹è¿›çš„ç²’å­ç¾¤ä¸æƒ¯æ€§æƒé‡çº¿æ€§é€’å‡çš„ç²’å­ç¾¤åˆ†åˆ«å¯¹Griewankå‡½æ•°
+%è¿›è¡Œä¼˜åŒ–ã€‚ç²’å­æ•°ï¼š60ï¼›ç»´æ•°ï¼š10ï¼›æœ€å¤§è¿­ä»£æ¬¡æ•°ï¼š500ï¼›åˆ†åˆ«æµ‹è¯•50æ¬¡å–å¹³å‡å€¼ã€‚
+%æ—¶é—´ï¼š2017.6.17
+  
 clc;
 clear;
-m=60;%Á£×ÓÊı
-dim=10;%Á£×ÓÎ¬Êı
-vmax=[60,60,60,60,60,60,60,60,60,60];%ËÙ¶È×î´óÖµ 
-vmin=[-60,-60,-60,-60,-60,-60,-60,-60,-60,-60];%ËÙ¶È×îĞ¡Öµ
-xmax=[600,600,600,600,600,600,600,600,600,600];%Î»ÖÃ×î´óÖµ
-xmin=[-600,-600,-600,-600,-600,-600,-600,-600,-600,-600];%Î»ÖÃ×îĞ¡Öµ
-tmax=300;%×î´óµü´ú´ÎÊı
+m=60;%ç²’å­æ•°
+dim=10;%ç²’å­ç»´æ•°
+vmax=[60,60,60,60,60,60,60,60,60,60];%é€Ÿåº¦æœ€å¤§å€¼ 
+vmin=[-60,-60,-60,-60,-60,-60,-60,-60,-60,-60];%é€Ÿåº¦æœ€å°å€¼
+xmax=[600,600,600,600,600,600,600,600,600,600];%ä½ç½®æœ€å¤§å€¼
+xmin=[-600,-600,-600,-600,-600,-600,-600,-600,-600,-600];%ä½ç½®æœ€å°å€¼
+tmax=300;%æœ€å¤§è¿­ä»£æ¬¡æ•°
 kmax=500;
 c1=2; 
-c2=2; %Ñ§Ï°Òò×Ó
+c2=2; %å­¦ä¹ å› å­
 x=rand(m,dim);
 v=rand(m,dim);
 pfit=rand(1,m);
-flag=0;%ÅĞ¶Ï½ø»¯Í£ÖÍ±êÖ¾
-wmax=0.9; %¹ßĞÔÈ¨ÖØ×î´óÖµ wpso
-wmin=0.4; %¹ßĞÔÈ¨ÖØ×îĞ¡Öµ wpso
+flag=0;%åˆ¤æ–­è¿›åŒ–åœæ»æ ‡å¿—
+wmax=0.9; %æƒ¯æ€§æƒé‡æœ€å¤§å€¼ wpso
+wmin=0.4; %æƒ¯æ€§æƒé‡æœ€å°å€¼ wpso
 gbest1= zeros(1,tmax);
 gbest2= zeros(1,tmax);
-position1=zeros(tmax,dim);%Á£×ÓÎ»ÖÃ¸ú×Ù
-position2=zeros(tmax,dim);%Á£×ÓÎ»ÖÃ¸ú×Ù
+position1=zeros(tmax,dim);%ç²’å­ä½ç½®è·Ÿè¸ª
+position2=zeros(tmax,dim);%ç²’å­ä½ç½®è·Ÿè¸ª
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%begin
-nummax=1; %²âÊÔ´ÎÊı
-testbest1=zeros(1,nummax); %Ã¿´ÎÊÔÑéµÄ×îÓÅÖµ
-testbest2=zeros(1,nummax); %Ã¿´ÎÊÔÑéµÄ×îÓÅÖµ
-%%%%%%%%%%%%%%%%%%%%»ìãçÁ£×ÓÈº
+nummax=1; %æµ‹è¯•æ¬¡æ•°
+testbest1=zeros(1,nummax); %æ¯æ¬¡è¯•éªŒçš„æœ€ä¼˜å€¼
+testbest2=zeros(1,nummax); %æ¯æ¬¡è¯•éªŒçš„æœ€ä¼˜å€¼
+%%%%%%%%%%%%%%%%%%%%æ··æ²Œç²’å­ç¾¤
 for number=1:nummax      
-    for i=1:m    %Î»ÖÃ»ìãç³õÊ¼»¯  m1¸öÁ£×ÓÖĞÑ¡Ôñ×îÓÅµÄm¸öÁ£×ÓÎª³õÊ¼Á£×Ó
+    for i=1:m    %ä½ç½®æ··æ²Œåˆå§‹åŒ–  m1ä¸ªç²’å­ä¸­é€‰æ‹©æœ€ä¼˜çš„mä¸ªç²’å­ä¸ºåˆå§‹ç²’å­
         result1=0;
         result2=1;
         for j=1:dim    
@@ -41,15 +41,15 @@ for number=1:nummax
         pfit(i)=1+result1-result2; 
     end    
            
-    pb=x;%Á£×Ó³õÊ¼×î¼ÑÎ»ÖÃ¸³Öµ
-    for i=1:m   %ËÙ¶È³õÊ¼»¯
+    pb=x;%ç²’å­åˆå§‹æœ€ä½³ä½ç½®èµ‹å€¼
+    for i=1:m   %é€Ÿåº¦åˆå§‹åŒ–
         for j=1:dim
              v(i,j)=rand()*(vmax(j)-vmin(j))+vmin(j);
         end
     end 
-   [gbest,index]=min(pfit);%gbestÈ«¾Ö×îĞ¡ÊÊÓ¦¶È
-   gbestbefore=0;%ÉÏ´ÎÈ«¾Ö×îĞ¡Öµ
-   pg=x(index,:);%È«¾Ö×î¼ÑÎ»ÖÃ
+   [gbest,index]=min(pfit);%gbestå…¨å±€æœ€å°é€‚åº”åº¦
+   gbestbefore=0;%ä¸Šæ¬¡å…¨å±€æœ€å°å€¼
+   pg=x(index,:);%å…¨å±€æœ€ä½³ä½ç½®
     for t=1:tmax
          w=wmax-(wmax-wmin)*t/tmax+(0.5-rand())*0.8;
         for i=1:m           
@@ -131,7 +131,7 @@ for number=1:nummax
     end   
     testbest1(number)=gbest;
 end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%¹ßĞÔÈ¨ÖØÏßĞÔµİ¼õ·½Ê½
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%æƒ¯æ€§æƒé‡çº¿æ€§é€’å‡æ–¹å¼
 for number=1:nummax
    for i=1:m
         result1=0;
@@ -149,8 +149,8 @@ for number=1:nummax
            v(i,j)=rand()*(vmax(j)-vmin(j))+vmin(j);
        end
    end
-   [gbest,index]=min(pfit);%gbestÈ«¾Ö×îĞ¡ÊÊÓ¦¶È
-    pg=x(index,:);%È«¾Ö×î¼ÑÎ»ÖÃ
+   [gbest,index]=min(pfit);%gbestå…¨å±€æœ€å°é€‚åº”åº¦
+    pg=x(index,:);%å…¨å±€æœ€ä½³ä½ç½®
     for t=1:tmax
        w=wmax-(wmax-wmin)*t/tmax;     
         for i=1:m           
@@ -193,20 +193,20 @@ for number=1:nummax
     end  
     testbest2(number)=gbest;
 end
-testbestmax1=max(testbest1);%×î´óÖµ
-testbestmin1=min(testbest1);%×îĞ¡Öµ
-testbestmean1=mean(testbest1);%Æ½¾ùÖµ
-%%%%%%%%%%%%%%%¼ÆËã±ê×¼²î
+testbestmax1=max(testbest1);%æœ€å¤§å€¼
+testbestmin1=min(testbest1);%æœ€å°å€¼
+testbestmean1=mean(testbest1);%å¹³å‡å€¼
+%%%%%%%%%%%%%%%è®¡ç®—æ ‡å‡†å·®
 fangcha1=0;
 for number=1:nummax
     fangcha1=fangcha1+(testbest1(number)-testbestmean1)^2;
 end
 fangcha1=sqrt(fangcha1/nummax);
 
-testbestmax2=max(testbest2);%×î´óÖµ
-testbestmin2=min(testbest2);%×îĞ¡Öµ
-testbestmean2=mean(testbest2);%Æ½¾ùÖµ
-%%%%%%%%%%%%%%%¼ÆËã±ê×¼²î
+testbestmax2=max(testbest2);%æœ€å¤§å€¼
+testbestmin2=min(testbest2);%æœ€å°å€¼
+testbestmean2=mean(testbest2);%å¹³å‡å€¼
+%%%%%%%%%%%%%%%è®¡ç®—æ ‡å‡†å·®
 fangcha2=0;
 for number=1:nummax
     fangcha2=fangcha2+(testbest2(number)-testbestmean2)^2;
@@ -222,14 +222,14 @@ figure(1);
 plot(t,log10(gbest1(t)),'-r',t,log10(gbest2(t)),'--b');
 % plot(t,gbest1(t),'-r',t,gbest2(t),'--b');
 figure(1);
-legend('¸Ä½øPSO','±ê×¼PSO');
-xlabel('½ø»¯´ÎÊı');
-ylabel('ÊÊÓ¦ÖµµÄ¶ÔÊı');
+legend('æ”¹è¿›PSO','æ ‡å‡†PSO');
+xlabel('è¿›åŒ–æ¬¡æ•°');
+ylabel('é€‚åº”å€¼çš„å¯¹æ•°');
 figure(2);
 plot(1:nummax,testbest1(1:nummax),'-d',1:nummax,testbest2(1:nummax),'-o');
-legend('¸Ä½øPSO','±ê×¼PSO');
-xlabel('ÊµÑé´ÎÊı');
-ylabel('ÊÊÓ¦Öµ');
+legend('æ”¹è¿›PSO','æ ‡å‡†PSO');
+xlabel('å®éªŒæ¬¡æ•°');
+ylabel('é€‚åº”å€¼');
 % figure(4);
 % plot(t,position1(t,:));
 % figure(5);
