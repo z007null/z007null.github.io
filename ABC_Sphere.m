@@ -28,7 +28,7 @@ D=10;               % 未知数为100个
 ub=ones(1,D)*10;    % 未知量取值下边界
 lb=ones(1,D)*(-10); % 未知量取值上边界
 runtime=1;           % 算法运行次数，一般设置1即可
-
+  
 GlobalMins=zeros(1,runtime);   % 适应度最小值初始化
 
 for r=1:runtime
