@@ -14,7 +14,7 @@
 % GlobalMins[runtime];   % 循环计算该算法的次数，记录下的最小解，验证算法的鲁棒性和稳定性
 clc,clear,close all
 warning off
-feature jit off
+feature jit off   
 tic
 % 算法参数
 NP=20;           % 蜂群大小
