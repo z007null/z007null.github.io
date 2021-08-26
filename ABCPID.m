@@ -12,7 +12,7 @@
 % GlobalMin;             % 目标函数值最小值
 % GlobalParams[D];       % 每一次运行该算法得到的最优个体值，未知数的解
 % GlobalMins[runtime];   % 循环计算该算法的次数，记录下的最小解，验证算法的鲁棒性和稳定性
-clc,clear,close all
+clc,clear,close all  
 warning off
 feature jit off
 tic
