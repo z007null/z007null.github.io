@@ -17,7 +17,7 @@ warning off
 feature jit off  
 tic
 % 算法参数
-NP=20;           % 蜂群大小
+NP=20;           % 蜂群大小    
 dim=3;%蜜蜂维数
 c3=2;
 FoodNumber=NP/2; % 蜂群食物源数量，也就是产生 解 的个数
