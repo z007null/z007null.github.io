@@ -6,7 +6,7 @@ close all;
 m=20;%粒子数
 m1=50;
 dim=3;%粒子维数
-vmax=[2,1,1];%速度最大值 kp,ki,kd
+vmax=[2,1,1];%速度最大值 kp,ki,kd  
 vmin=[-2,-1,-1];%速度最小值kp,ki,kd
 xmax=[10,5,5];%位置最大值kp,ki,kd
 xmin=[0,0,0];%位置最小值
