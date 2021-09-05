@@ -9,7 +9,7 @@
 
 #define BUFFER_SIZE 2048
 
-int main()
+int main()     
 	{
 	pid_t pid;
 	int shmid;
