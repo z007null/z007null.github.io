@@ -1,11 +1,11 @@
-%%% ¡¶¼ÆËãÖÇÄÜ¡·180Ò³Ï°Ìâ1
-%%%Ê¯½¨Æ½
+%%% ã€Šè®¡ç®—æ™ºèƒ½ã€‹180é¡µä¹ é¢˜1
+%%%
 %%%2021.5.7
 clc;
 clear all;
 close all;
-dim=10;%Á£×ÓÎ¬Êý
-tmax=200;%×î´óµü´ú´ÎÊý
+dim=10;%ç²’å­ç»´æ•°
+tmax=200;%æœ€å¤§è¿­ä»£æ¬¡æ•°
 m=30;%
 for j=1:dim
     xmax(j)=5.12;
@@ -14,13 +14,13 @@ for j=1:dim
     vmin(j)=0.2*xmin(j);
 end
 c1=2; 
-c2=2; %Ñ§Ï°Òò×Ó
-wmax=0.9; %¹ßÐÔÈ¨ÖØ×î´óÖµ wpso
-wmin=0.4; %¹ßÐÔÈ¨ÖØ×îÐ¡Öµ wpso
+c2=2; %å­¦ä¹ å› å­
+wmax=0.9; %æƒ¯æ€§æƒé‡æœ€å¤§å€¼ wpso
+wmin=0.4; %æƒ¯æ€§æƒé‡æœ€å°å€¼ wpso
   gbest_bbpso=zeros(1,tmax);
   gbest_pso=zeros(1,tmax);
-nummax=1; %²âÊÔ´ÎÊý
-best_bbpso=zeros(1,nummax); %Ã¿´ÎÊÔÑéµÄ×îÓÅÖµ
+nummax=1; %æµ‹è¯•æ¬¡æ•°
+best_bbpso=zeros(1,nummax); %æ¯æ¬¡è¯•éªŒçš„æœ€ä¼˜å€¼
 best_pso=zeros(1,nummax); 
 
 %%%%%%%%%%%%%%%%%%%BBPSO
@@ -34,17 +34,17 @@ for number=1:nummax
             pfit(i)=pfit(i)+(x(i,j)^2-10*cos(2*pi*x(i,j))+10);       
         end     
     end
-    pb=x;%Á£×Ó³õÊ¼×î¼ÑÎ»ÖÃ¸³Öµ(¸öÌå×î¼ÑÎ»ÖÃ)
-   [gbest,index]=min(pfit);%gbestÈ«¾Ö×îÐ¡ÊÊÓ¦¶È
-   pg=x(index,:);%È«¾Ö×î¼ÑÎ»ÖÃ
+    pb=x;%ç²’å­åˆå§‹æœ€ä½³ä½ç½®èµ‹å€¼(ä¸ªä½“æœ€ä½³ä½ç½®)
+   [gbest,index]=min(pfit);%gbestå…¨å±€æœ€å°é€‚åº”åº¦
+   pg=x(index,:);%å…¨å±€æœ€ä½³ä½ç½®
     for t=1:tmax    
         for i=1:m   
             for j=1:dim
                 u=0.5*(pb(i,j)+pg(j));
                 v=abs(pb(i,j)-pg(j));
-                x(i,j)=normrnd(u,v);%¸ßË¹ÕýÌ¬·Ö²¼
+                x(i,j)=normrnd(u,v);%é«˜æ–¯æ­£æ€åˆ†å¸ƒ
                if x(i,j)>xmax(j)||x(i,j)<xmin(j)
-                    x(i,j)=rand()*(xmax(j)-xmin(j))+xmin(j); %¶àÑùÐÔ
+                    x(i,j)=rand()*(xmax(j)-xmin(j))+xmin(j); %å¤šæ ·æ€§
                 end                         
             end   
             pfitness=0;
@@ -65,7 +65,7 @@ for number=1:nummax
     end
     best_bbpso(number)=gbest;
 end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%¹ßÐÔÈ¨ÖØÏßÐÔµÝ¼õ·½Ê½
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%æƒ¯æ€§æƒé‡çº¿æ€§é€’å‡æ–¹å¼
 for number=1:nummax
    for i=1:m
          pfit(i)=0;
@@ -80,8 +80,8 @@ for number=1:nummax
            v(i,j)=rand()*(vmax(j)-vmin(j))+vmin(j);
        end
    end
-   [gbest,index]=min(pfit);%gbestÈ«¾Ö×îÐ¡ÊÊÓ¦¶È
-    pg=x(index,:);%È«¾Ö×î¼ÑÎ»ÖÃ
+   [gbest,index]=min(pfit);%gbestå…¨å±€æœ€å°é€‚åº”åº¦
+    pg=x(index,:);%å…¨å±€æœ€ä½³ä½ç½®
     for t=1:tmax
        w=wmax-(wmax-wmin)*t/tmax;     
         for i=1:m           
@@ -128,6 +128,6 @@ figure(1);
   %legend('BBPSO','PSO');
  % legend('BBPSO');
   legend('PSO');
-xlabel('µü´ú´ÎÊý');
-ylabel('×îÓÅÊÊÓ¦Öµ');         
+xlabel('è¿­ä»£æ¬¡æ•°');
+ylabel('æœ€ä¼˜é€‚åº”å€¼');         
 
