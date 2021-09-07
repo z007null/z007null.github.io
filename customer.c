@@ -3,7 +3,7 @@
 
 int main()
 {
-	void *shared_memory = NULL;
+	void *shared_memory = NULL;    
 	struct shm_buff *shm_buff_inst;
 	int shmid, semid;
 	semid = semget(ftok(".",'a'), 1, 0666);
