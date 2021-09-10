@@ -5,7 +5,7 @@ clc;
 clear all;
 close all;
 dim=10;%粒子维数
-tmax=200;%最大迭代次数
+tmax=200;%最大迭代次数     
 m=30;%
 for j=1:dim
     xmax(j)=5.12;
