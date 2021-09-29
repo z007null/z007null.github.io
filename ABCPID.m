@@ -23,7 +23,7 @@ c3=2;
 FoodNumber=NP/2; % 蜂群食物源数量，也就是产生 解 的个数
 limit=10;       % 经过“limit”次采蜜蜂和观察蜂的循环搜索之后，不能够被改进，那么该位置将被放弃
 maxCycle=500;    % 最大迭代循环
-x=rand(NP,dim);
+x=rand(NP,dim);    
 %/* Problem specific variables*/
 for i=1:NP    %计算粒子初始位置适应度
         kp=x(i,1); %比例系数赋值
