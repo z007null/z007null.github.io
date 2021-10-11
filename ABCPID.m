@@ -1,17 +1,17 @@
 % 人工蜂群算法
 % 参数说明：    
-% Foods [FoodNumber][D]; % 初始化的食物源
-% ObjVal[FoodNumber];    % 目标函数
-% Fitness[FoodNumber];   % 适应度值，目标函数值的倒数
-% trial[FoodNumber];     % 拖尾参数
-% prob[FoodNumber];      % 计算的概率值
-% solution [D];          % 产生的新解，候选位置 produced by v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij}) j is a randomly chosen parameter and k is a randomlu chosen solution different from i*/
-% ObjValSol;             % 新解下的目标函数值
-% FitnessSol;            % 新解的适应度值
-% neighbour, param2change; 对应于方程 v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij})*/
-% GlobalMin;             % 目标函数值最小值
-% GlobalParams[D];       % 每一次运行该算法得到的最优个体值，未知数的解
-% GlobalMins[runtime];   % 循环计算该算法的次数，记录下的最小解，验证算法的鲁棒性和稳定性
+Foods [FoodNumber][D]; % 初始化的食物源
+ObjVal[FoodNumber];    % 目标函数
+Fitness[FoodNumber];   % 适应度值，目标函数值的倒数  
+trial[FoodNumber];     % 拖尾参数
+prob[FoodNumber];      % 计算的概率值
+solution [D];          % 产生的新解，候选位置 produced by v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij}) j is a randomly chosen parameter and k is a randomlu chosen solution different from i*/
+ObjValSol;             % 新解下的目标函数值
+FitnessSol;            % 新解的适应度值
+neighbour, param2change; 对应于方程 v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij})*/
+GlobalMin;             % 目标函数值最小值
+GlobalParams[D];       % 每一次运行该算法得到的最优个体值，未知数的解
+GlobalMins[runtime];   % 循环计算该算法的次数，记录下的最小解，验证算法的鲁棒性和稳定性
 clc,clear,close all  
 warning off
 feature jit off  
