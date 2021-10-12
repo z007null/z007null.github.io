@@ -1,7 +1,7 @@
 %%% 《计算智能》180页习题1
 %%%
 %%%2021.5.7
-clc;
+clc;    
 clear all;
 close all;
 dim=10;%粒子维数
