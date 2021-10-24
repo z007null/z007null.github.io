@@ -1,7 +1,7 @@
 % 人工蜂群算法
 % 参数说明：    
 Foods [FoodNumber][D]; % 初始化的食物源
-ObjVal[FoodNumber];    % 目标函数     
+ObjVal[FoodNumber];    % 目标函数         
 Fitness[FoodNumber];   % 适应度值，目标函数值的倒数                  
 trial[FoodNumber];     % 拖尾参数
 prob[FoodNumber];      % 计算的概率值
