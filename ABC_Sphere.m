@@ -15,7 +15,7 @@
 clc,clear,close all
 warning off
 feature jit off   
-tic  
+tic     
 % 算法参数
 NP=20;           % 蜂群大小
 FoodNumber=NP/2; % 蜂群食物源数量，也就是产生 解 的个数
