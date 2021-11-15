@@ -16,7 +16,7 @@ clc,clear,close all
 warning off
 feature jit off  
 tic
-% 算法参数
+% 算法参数  
 NP=20;           % 蜂群大小    
 dim=3;%蜜蜂维数
 c3=2;
