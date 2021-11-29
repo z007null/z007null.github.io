@@ -1,4 +1,4 @@
-% 人工蜂群算法
+% 人工蜂群算法  
 % 参数说明：
 % Foods [FoodNumber][D]; % 初始化的食物源
 % ObjVal[FoodNumber];    % 目标函数            
